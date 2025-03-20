@@ -53,12 +53,17 @@ class DailySummaryDetailsController extends Controller
         $work = new DailySummaryDetail();
         $work->daily_summary_id = $request->daily_summary_id;
         $work->name = $request->name;
-        $work->estimated_time = $request->estimated_time;
-        $work->spent_time = $request->spent_time ?? 0;
-        $work->learning_time = $request->learning_time ?? 0;
+        $work->estimated_time = $request->estimated_time*60;
+        $work->spent_time = $request->spent_time*60 ?? 0;
+        $work->learning_time = $request->learning_time*60 ?? 0;
         $work->task_status = $request->task_status;
         $work->save();
-
+        // upadte daily_summaries table 
+        $daily_summary = DailySummary::find($request->daily_summary_id);
+        $daily_summary->total_estimated_time += $request->estimated_time*60 ?? 0;
+        $daily_summary->total_spent_time += $request->spent_time*60 ?? 0;
+        $daily_summary->total_learning_time += $request->learning_time*60 ?? 0;
+        $daily_summary->save();
         // Redirect with success message
         return redirect()->route('dashboard')->with('success', 'Work added successfully!');
     }
@@ -92,12 +97,29 @@ class DailySummaryDetailsController extends Controller
         }
         $daily_summary_detail = DailySummaryDetail::findOrFail($request->id);
         $daily_summary_detail->name = $request->name;
-        $daily_summary_detail->estimated_time = $request->estimated_time;
-        $daily_summary_detail->spent_time = $request->spent_time ?? 0;
-        $daily_summary_detail->learning_time = $request->learning_time ?? 0;
+        $daily_summary_detail->estimated_time = $request->estimated_time*60;
+        $daily_summary_detail->spent_time = $request->spent_time*60 ?? 0;
+        $daily_summary_detail->learning_time = $request->learning_time*60 ?? 0;
         $daily_summary_detail->task_status = $request->task_status;
         $daily_summary_detail->save();
+        // upadte daily_summaries table 
+        $daily_summary = DailySummary::find($daily_summary_detail->daily_summary_id);
+        $daily_summary->total_estimated_time += $request->estimated_time*60 ?? 0;
+        $daily_summary->total_spent_time += $request->spent_time*60 ?? 0;
+        $daily_summary->total_learning_time += $request->learning_time*60 ?? 0;
+        $daily_summary->save();
         return redirect()->route('dashboard')->with('success', 'Task updated successfully!');
+    }
+    public function delete($id){
+        $task = DailySummaryDetail::findOrFail($id);
+        // upadte daily_summaries table 
+        $daily_summary = DailySummary::find($task->daily_summary_id);
+        $daily_summary->total_estimated_time -= $task->estimated_time * 60 ?? 0;
+        $daily_summary->total_spent_time -= $task->spent_time * 60 ?? 0;
+        $daily_summary->total_learning_time -= $task->learning_time * 60 ?? 0;
+        $daily_summary->save();
+        $task->delete();
+        return redirect()->back()->with('success', 'Task deleted successfully.');
     }
 
 

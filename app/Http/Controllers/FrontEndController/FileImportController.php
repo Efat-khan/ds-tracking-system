@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontEndController;
 
 use App\Http\Controllers\Controller;
+use App\Models\DailySummary;
 // use App\Helpers\SimpleXLSX;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,20 +37,25 @@ class FileImportController extends Controller
         $header = fgetcsv($handle); // Read and ignore the first row (header)
 
         $data = [];
+        $daily_summary = DailySummary::find($daily_summary_id);
         while ($row = fgetcsv($handle)) {
             if (!empty($row[4])) { // Skip rows where task_status is empty
                 $data[] = [
                     'daily_summary_id' => $daily_summary_id,
                     'name'             => isset($row[0]) ? $row[0] : 'Not Set',
-                    'estimated_time'   => isset($row[1]) ? (float) $row[1] : 0,
-                    'spent_time'       => isset($row[2]) ? (float) $row[2] : 0,
-                    'learning_time'    => isset($row[3]) ? (float) $row[3] : 0,
-                    'task_status'      => ($row[4] == 'To Do') ? 'to_do' :( $row[4] == 'In Progress' ? 'in_progress' :'complete')
+                    'estimated_time'   => isset($row[1]) ? (float) $row[1]*60 : 0,
+                    'spent_time'       => isset($row[2]) ? (float) $row[2]*60 : 0,
+                    'learning_time'    => isset($row[3]) ? (float) $row[3]*60 : 0,
+                    'task_status'      => ($row[4] == 'To Do') ? 'to_do' : ($row[4] == 'In Progress' ? 'in_progress' : 'complete')
                 ];
+                // upadte daily_summaries table 
+                $daily_summary->total_estimated_time += isset($row[1]) ? (float) $row[1] * 60 : 0;
+                $daily_summary->total_spent_time += isset($row[2]) ? (float) $row[2] * 60 : 0;
+                $daily_summary->total_learning_time += isset($row[3]) ? (float) $row[3] * 60 : 0;
             }
         }
+        $daily_summary->save();
         fclose($handle);
-
         if (!empty($data)) {
             DB::table('daily_summary_details')->insert($data);
         }
@@ -71,18 +77,24 @@ class FileImportController extends Controller
         array_shift($rows); // Remove the header row
 
         $data = [];
+        $daily_summary = DailySummary::find($daily_summary_id);
         foreach ($rows as $row) {
             if (!empty($row[4])) { // Skip rows where task_status is empty
                 $data[] = [
                     'daily_summary_id' => $daily_summary_id,
                     'name'             => isset($row[0]) ? $row[0] : 'Not Set',
-                    'estimated_time'   => isset($row[1]) ? (float) $row[1] : 0,
-                    'spent_time'       => isset($row[2]) ? (float) $row[2] : 0,
-                    'learning_time'    => isset($row[3]) ? (float) $row[3] : 0,
-                    'task_status'      => ($row[4] == 'To Do') ? 'to_do' :( $row[4] == 'In Progress' ? 'in_progress' :'complete')
+                    'estimated_time'   => isset($row[1]) ? (float) $row[1]*60 : 0,
+                    'spent_time'       => isset($row[2]) ? (float) $row[2]*60 : 0,
+                    'learning_time'    => isset($row[3]) ? (float) $row[3]*60 : 0,
+                    'task_status'      => ($row[4] == 'To Do') ? 'to_do' : ($row[4] == 'In Progress' ? 'in_progress' : 'complete')
                 ];
+                // upadte daily_summaries table 
+                $daily_summary->total_estimated_time += isset($row[1]) ? (float) $row[1] * 60 : 0;
+                $daily_summary->total_spent_time += isset($row[2]) ? (float) $row[2] * 60 : 0;
+                $daily_summary->total_learning_time += isset($row[3]) ? (float) $row[3] * 60 : 0;
             }
         }
+        $daily_summary->save();
 
         if (!empty($data)) {
             DB::table('daily_summary_details')->insert($data);

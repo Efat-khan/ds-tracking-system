@@ -12,7 +12,7 @@
                 style="padding-top:6px;"  required>
                 <button type="submit" id="add-task-cta"
                 class="button regular-button blue-background"
-                style="padding-top:0px;">Uplode</button>
+                style="padding-top:0px;">Upload</button>
             </form>
             <a href="{{route('employee.ds.work.index')}}"
                 id="add-task-cta"
@@ -60,6 +60,16 @@
                     width="24"
                     height="24"></iconify-icon>
                 <span>Community</span>
+            </a>
+        </div>
+        <div class="radio-container">
+            <a href="{{route('employee.report')}}" class="radio-label {{ request()->routeIs('employee.community') ? 'active' : '' }}">
+                <iconify-icon
+                    icon="ic:round-grid-view"
+                    style="color: black"
+                    width="24"
+                    height="24"></iconify-icon>
+                <span>Report</span>
             </a>
         </div>
     </div>

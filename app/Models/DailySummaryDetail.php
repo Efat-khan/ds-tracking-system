@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DailySummaryDetail extends Model
 {
     use HasFactory;
+    protected $table='daily_summary_details';
     protected $fillable = [
         'ds_id',          // Foreign key to the daily_summaries table
         'name',           // Name of the task

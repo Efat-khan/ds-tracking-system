@@ -242,14 +242,14 @@
       @error('name') <p class="text-dark">{{ $message }}</p> @enderror
 
       <label for="estimated_time" class="label">Estimated Time</label>
-      <input type="number" name="estimated_time" value="{{ $daily_summary_detail->estimated_time ?? '' }}" class="input white-background">
+      <input type="number" name="estimated_time" value="{{ $daily_summary_detail->estimated_time/60 ?? '' }}" class="input white-background">
       @error('estimated_time') <p class="text-dark">{{ $message }}</p> @enderror
 
       <label for="spent_time" class="label">Spent Time</label>
-      <input type="number" name="spent_time" value="{{ $daily_summary_detail->spent_time ?? '' }}" class="input white-background">
+      <input type="number" name="spent_time" value="{{ $daily_summary_detail->spent_time/60 ?? '' }}" class="input white-background">
 
       <label for="learning_time" class="label">Learning Time</label>
-      <input type="number" name="learning_time" value="{{ $daily_summary_detail->learning_time ?? '' }}" class="input white-background">
+      <input type="number" name="learning_time" value="{{ $daily_summary_detail->learning_time/60 ?? '' }}" class="input white-background">
 
       <h2 class="label">Status</h2>
       <div class="status-select white-background flex items-center justify-between cursor-pointer">
