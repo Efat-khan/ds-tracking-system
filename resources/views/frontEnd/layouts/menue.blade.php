@@ -1,9 +1,15 @@
 <!-- header -->
 <div class="max-width-container">
     <div class="header flex items-center justify-between">
-        <h1 class="title">{{ Auth::user()->name }}'s Daily Summary</h1>
+        <h1 class="title">{{ Auth::user()->name }}'s Daily Standup</h1>
         <div class="buttons-container">
             @if (!empty($todays_ds))
+            <a href="{{route('employee.ds.work.index')}}"
+                id="add-task-cta"
+                class="button regular-button blue-background"
+                style="padding-top:9px;">
+                Add CSV Task
+            </a>
             <a href="{{route('employee.ds.work.index')}}"
                 id="add-task-cta"
                 class="button regular-button blue-background"

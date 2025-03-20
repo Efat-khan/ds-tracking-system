@@ -40,4 +40,9 @@ class EmployeeDashboardController extends Controller
     
         return redirect()->back()->with('success', 'Task status updated successfully.');
     }
+    public function deleteDsWork($id){
+        $task = DailySummaryDetail::findOrFail($id);
+        $task->delete();
+        return redirect()->back()->with('success', 'Task deleted successfully.');
+    }
 }

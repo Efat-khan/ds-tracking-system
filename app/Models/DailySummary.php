@@ -23,4 +23,8 @@ class DailySummary extends Model
     {
         return $this->hasMany(DailySummaryDetail::class, 'daily_summary_id');
     }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

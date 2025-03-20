@@ -5,12 +5,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh; /* Adjust height as needed */
+    height: 80vh;
+    /* Adjust height as needed */
     text-align: center;
-    font-size: 24px; /* Make the text large */
+    font-size: 24px;
+    /* Make the text large */
     font-weight: bold;
-    color: #333; /* Darker color for emphasis */
+    color: #333;
+    /* Darker color for emphasis */
   }
+
   .status-dropdown {
     border: none;
     padding: 8px;
@@ -67,7 +71,25 @@
               <input type="hidden" name="task_id" value="{{ $value->id }}">
               <div class="task-button">
                 <div>
-                  <p class="task-name">{{ $value->name }}</p>
+                  <!-- Delete Task Btn -->
+                  <div style="display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 10px;">
+
+                    <p class="task-name" style="flex-grow: 1; margin: 0;">
+                      {{ $value->name }}
+                    </p>
+
+                    <div class="text-center">
+                      <a href="{{route('employee.ds.work.delete',$value->id)}}"
+                        class="button regular-button pink-background cta-button"
+                        title="Add this to my task.">
+                        X
+                      </a>
+                    </div>
+                  </div>
                   <!-- Dropdown moved below the task name -->
                   <select name="task_status" class="status-dropdown white-background" onchange="this.form.submit()">
                     <option value="to_do" class="pink-background" {{ $value->task_status == 'to_do' ? 'selected' : '' }}>To do</option>

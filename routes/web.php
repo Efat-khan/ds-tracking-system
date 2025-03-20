@@ -20,6 +20,7 @@ Route::prefix('employee')->middleware(['auth', 'verified'])->group(function(){
     Route::get('/dashboard', [EmployeeDashboardController::class,'index']
     )->name('dashboard');
     Route::post('/update-ds-work-status',[EmployeeDashboardController::class,'updateDsWorkStatus'])->name('employee.ds.work.status.update');
+    Route::get('/update-ds-work-delete/{id}',[EmployeeDashboardController::class,'deleteDsWork'])->name('employee.ds.work.delete');
     // Community Routes
     Route::get('/community', [EmployeeCommunityController::class,'index'])->name('employee.community');
     

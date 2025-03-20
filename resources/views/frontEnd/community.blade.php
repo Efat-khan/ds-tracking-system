@@ -1,6 +1,19 @@
 @extends('frontEnd.layouts.master')
 @section('content')
 <style>
+  .no-ds-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    /* Adjust height as needed */
+    text-align: center;
+    font-size: 24px;
+    /* Make the text large */
+    font-weight: bold;
+    color: #333;
+    /* Darker color for emphasis */
+  }
   .status-dropdown {
     border: none;
     padding: 8px;
@@ -36,135 +49,76 @@
   <!-- tasks -->
   <div class="max-width-container">
 
+    @if (count($all_users_todays_details) != 0)
     <!-- board view -->
-    <div id="board-view" class="board-view ">
+    <div id="board-view" class="board-view">
       <!-- list -->
-      @if (count($todays_ds_to_do_work) != 0)
       <div>
         <h2 class="list-header">
-          <span class="circle pink-background"></span><span class="text">To do</span>
-        </h2>
-        <ul class="tasks-list pink">
-          @foreach ($todays_ds_to_do_work as $key=>$value)
-
-          <li class="task-item">
-            <form method="POST" action="{{ route('employee.ds.work.status.update') }}">
-              @csrf
-              <input type="hidden" name="task_id" value="{{ $value->id }}">
-              <div class="task-button">
-                <div>
-                  <p class="task-name">{{ $value->name }}</p>
-                  <!-- Dropdown moved below the task name -->
-                  <select name="task_status" class="status-dropdown white-background" onchange="this.form.submit()">
-                    <option value="to_do" class="pink-background" {{ $value->task_status == 'to_do' ? 'selected' : '' }}>To do</option>
-                    <option value="in_progress" class="pink-background" {{ $value->task_status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                    <option value="complete" class="green-background" {{ $value->task_status == 'complete' ? 'selected' : '' }}>Done</option>
-                    <option value="not_done" class="blue-background" {{ $value->task_status == 'not_done' ? 'selected' : '' }}>Not Done</option>
-                  </select>
-                </div>
-                <!-- Arrow icon (optional, if needed) -->
-                <a href="{{route('employee.ds.work.edit',$value->id)}}">
-                  <iconify-icon
-                    icon="material-symbols:arrow-back-ios-rounded"
-                    style="color: black"
-                    width="18"
-                    height="18"
-                    class="arrow-icon">
-                  </iconify-icon>
-                </a>
-              </div>
-            </form>
-          </li>
-
-          @endforeach
-        </ul>
-      </div>
-      @endif
-      <!-- list -->
-      @if (count($todays_ds_in_progress_work) != 0)
-      <div>
-        <h2 class="list-header">
-          <span class="circle blue-background"></span><span class="text">In Progress</span>
-        </h2>
-        <ul class="tasks-list blue">
-          @foreach ($todays_ds_in_progress_work as $key=>$value)
-          <li class="task-item">
-            <form method="POST" action="{{ route('employee.ds.work.status.update') }}">
-              @csrf
-              <input type="hidden" name="task_id" value="{{ $value->id }}">
-
-              <div class="task-button">
-
-                <div>
-                  <p class="task-name">{{ $value->name }}</p>
-                  <!-- Dropdown moved below the task name -->
-                  <select name="task_status" class="status-dropdown white-background" onchange="this.form.submit()">
-                    <option value="to_do" class="pink-background" {{ $value->task_status == 'to_do' ? 'selected' : '' }}>To do</option>
-                    <option value="in_progress" class="pink-background" {{ $value->task_status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                    <option value="complete" class="green-background" {{ $value->task_status == 'complete' ? 'selected' : '' }}>Done</option>
-                    <option value="not_done" class="blue-background" {{ $value->task_status == 'not_done' ? 'selected' : '' }}>Not Done</option>
-                  </select>
-                </div>
-                <!-- Arrow icon (optional, if needed) -->
-                <a href="{{route('employee.ds.work.edit',$value->id)}}">
-                  <iconify-icon
-                    icon="material-symbols:arrow-back-ios-rounded"
-                    style="color: black"
-                    width="18"
-                    height="18"
-                    class="arrow-icon">
-                  </iconify-icon>
-                </a>
-              </div>
-            </form>
-          </li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
-      <!-- list -->
-      @if (count($todays_ds_complete_work) != 0)
-      <div>
-        <h2 class="list-header">
-          <span class="circle green-background"></span><span class="text">Done</span>
+          <span class="circle green-background"></span><span class="text">Community Ds</span>
         </h2>
         <ul class="tasks-list green">
-          @foreach ($todays_ds_complete_work as $key=>$value)
+          @foreach ($all_users_todays_details as $key=>$value)
           <li class="task-item">
-            <form method="POST" action="{{ route('employee.ds.work.status.update') }}">
-              @csrf
-              <input type="hidden" name="task_id" value="{{ $value->id }}">
-
-              <div class="task-button">
-
-                <div>
-                  <p class="task-name">{{ $value->name }}</p>
-                  <!-- Dropdown moved below the task name -->
-                  <select name="task_status" class="status-dropdown white-background" onchange="this.form.submit()">
-                    <option value="to_do" class="pink-background" {{ $value->task_status == 'to_do' ? 'selected' : '' }}>To do</option>
-                    <option value="in_progress" class="pink-background" {{ $value->task_status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                    <option value="complete" class="green-background" {{ $value->task_status == 'complete' ? 'selected' : '' }}>Done</option>
-                    <option value="not_done" class="blue-background" {{ $value->task_status == 'not_done' ? 'selected' : '' }}>Not Done</option>
-                  </select>
+            <div class="task-button">
+              <div>
+                <div style="display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px; padding-bottom:10px">
+                  <p class="task-name">{{ $value['users']->name }}</p>
+                  <div class="text-center" style="padding-top: 0;">
+                    <a href="{{$value->git_url??'#'}}"
+                      target="_blank"
+                      class="button regular-button green-background cta-button" title="Add this to my task.">
+                      Git URL
+                    </a>
+                  </div>
                 </div>
-                <!-- Arrow icon (optional, if needed) -->
-                <a href="{{route('employee.ds.work.edit',$value->id)}}">
-                  <iconify-icon
-                    icon="material-symbols:arrow-back-ios-rounded"
-                    style="color: black"
-                    width="18"
-                    height="18"
-                    class="arrow-icon">
-                  </iconify-icon>
-                </a>
+                @if (count($value['details'])>0)
+                @foreach ($value['details'] as $key=>$value)
+                <div style="display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px; padding-bottom:10px">
+                  <p class="task-due-date" style="flex-grow: 1;">{{ $key+1 }}. {{$value->name}} - {{($value->task_status === 'to_do')?'TO DO':($value->task_status === 'in_progress'?'In Progress':'Complete')}} - ET {{$value->estimated_time}}h</p>
+                  <form method="POST" action="{{ route('employee.ds.work.store') }}" style="display: flex;
+  align-items: center;">
+                    @csrf
+                    <input type="text" name="daily_summary_id" value="{{ $todays_ds->id }}" hidden>
+                    <input type="text" name="name" value="{{ $value->name }}" hidden>
+
+                    <input type="number" name="estimated_time" value="{{ $value->estimated_time }}" hidden>
+                    <input type="text" name="task_status" value="to_do" hidden>
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        class="button regular-button green-background cta-button" title="Add this to my task.">
+                        +
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                @endforeach
+                @else
+                <p class="task-due-date"> No Task Added Today.</p>
+                @endif
+                <!-- Dropdown moved below the task name -->
+
               </div>
-            </form>
+            </div>
           </li>
           @endforeach
         </ul>
       </div>
-      @endif
     </div>
+    @else
+
+    <div class="no-ds-message">
+      <p>No DS is added Today.</p>
+    </div>
+    @endif
   </div>
 </div>
 
