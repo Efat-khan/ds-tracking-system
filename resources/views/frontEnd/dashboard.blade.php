@@ -54,6 +54,7 @@
       <p>No DS is added Today.</p>
     </div>
     @endif
+    
     <!-- board view -->
     <div id="board-view" class="board-view ">
       <!-- list -->

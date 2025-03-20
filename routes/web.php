@@ -4,6 +4,7 @@ use App\Http\Controllers\FrontEndController\DailySummaryController;
 use App\Http\Controllers\FrontEndController\DailySummaryDetailsController;
 use App\Http\Controllers\FrontEndController\EmployeeCommunityController;
 use App\Http\Controllers\FrontEndController\EmployeeDashboardController;
+use App\Http\Controllers\FrontEndController\FileImportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,8 @@ Route::prefix('employee')->middleware(['auth', 'verified'])->group(function(){
     )->name('dashboard');
     Route::post('/update-ds-work-status',[EmployeeDashboardController::class,'updateDsWorkStatus'])->name('employee.ds.work.status.update');
     Route::get('/update-ds-work-delete/{id}',[EmployeeDashboardController::class,'deleteDsWork'])->name('employee.ds.work.delete');
+    // File import Routes
+    Route::post('/import', [FileImportController::class, 'import'])->name('import');
     // Community Routes
     Route::get('/community', [EmployeeCommunityController::class,'index'])->name('employee.community');
     

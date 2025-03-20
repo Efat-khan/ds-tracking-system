@@ -4,12 +4,16 @@
         <h1 class="title">{{ Auth::user()->name }}'s Daily Standup</h1>
         <div class="buttons-container">
             @if (!empty($todays_ds))
-            <a href="{{route('employee.ds.work.index')}}"
-                id="add-task-cta"
+            <form action="{{route('import')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="text" name="daily_summary_id" value="{{$todays_ds->id}}"  hidden>
+                <input type="file" name="file" id="add-task-cta"
                 class="button regular-button blue-background"
-                style="padding-top:9px;">
-                Add CSV Task
-            </a>
+                style="padding-top:6px;"  required>
+                <button type="submit" id="add-task-cta"
+                class="button regular-button blue-background"
+                style="padding-top:0px;">Uplode</button>
+            </form>
             <a href="{{route('employee.ds.work.index')}}"
                 id="add-task-cta"
                 class="button regular-button blue-background"
