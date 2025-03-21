@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontEndController\DailySummaryDetailsController;
 use App\Http\Controllers\FrontEndController\EmployeeCommunityController;
 use App\Http\Controllers\FrontEndController\EmployeeDashboardController;
 use App\Http\Controllers\FrontEndController\FileImportController;
+use App\Http\Controllers\FrontEndController\ReportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,11 @@ Route::prefix('employee')->middleware(['auth', 'verified'])->group(function(){
     // Community Routes
     Route::get('/community', [EmployeeCommunityController::class,'index'])->name('employee.community');
     // File Export Routes
-    Route::get('/report', [EmployeeCommunityController::class,'index'])->name('employee.report');
+    Route::get('/report', [ReportController::class,'index'])->name('employee.report.index');
+    Route::post('/report/search',[ReportController::class,'search'])->name('employee.report.search');
+    Route::post('/employee/report/export/csv', [ReportController::class, 'exportCSV'])->name('employee.report.export.csv');
+    Route::post('/employee/report/export/excel', [ReportController::class, 'exportExcel'])->name('employee.report.export.excel');
+
     
     Route::get('/index', [DailySummaryController::class, 'index'])->name('employee.ds.index');
     Route::post('/add-daily-summary',[DailySummaryController::class,'store'])->name('employee.ds.store');

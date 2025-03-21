@@ -1,59 +1,89 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('admin.register') }}">
-        <h3 style="text-align: center;">Admin Registration Form</h3>
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DS Management System - Admin Signup</title>
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('frontEnd/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontEnd/css/entry-page.css') }}" />
+</head>
+
+<body>
+    <div class="row height-full">
+        <!-- left side -->
+        <div
+            class="left-column flex flex-column height-full justify-center items-center">
+            <h1 class="welcoming-title">Admin Registration</h1>
+            <form method="POST" class="form" autocomplete="off" action="{{ route('admin.register') }}">
+                @csrf
+                <label for="name" class="label">Name</label>
+                <input type="text" name="name" id="name" class="input" value="{{old('name')}}" required />
+                @if ($errors->has('name'))
+                <div class="alert alert-danger mt-2">
+                    {{ $errors->first('name') }}
+                </div>
+                @endif
+                <label for="phone" class="label">Phone</label>
+                <input type="text" name="phone" id="phone" class="input" value="{{old('phone')}}" required />
+                @if($errors->has('phone'))
+                <div class="alert alert-danger mt-2">
+                    {{ $errors->first('phone') }}
+                </div>
+                @endif
+                <label for="email" class="label">Email</label>
+                <input type="email" name="email" id="email" class="input" value="{{old('email')}}" required />
+                @if ($errors->has('email'))
+                <div class="alert alert-danger mt-2">
+                    {{ $errors->first('email') }}
+                </div>
+                @endif
+                <label for="password" class="label">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="input"
+                    required autocomplete="new-password" />
+                @if ($errors->has('password'))
+                <div class="alert alert-danger mt-2">
+                    {{ $errors->first('password') }}
+                </div>
+                @endif
+                <label for="password_confirmation" class="label">Confirm Password</label>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    id="password_confirmation"
+                    class="input"
+                    required autocomplete="new-password" />
+                @if ($errors->has('password_confirmation'))
+                <div class="alert alert-danger mt-2">
+                    {{ $errors->first('password_confirmation') }}
+                </div>
+                @endif
+                <button
+                    type="submit"
+                    class="button regular-button pink-background cta-btn">
+                    Sign up
+                </button>
+            </form>
+            <p class="login-prompt">
+                Already have an account?
+                <a href="{{ route('admin.login') }}" class="log-in-link">Log in</a>
+            </p>
         </div>
+        <!-- right side -->
+        <div class="right-column"></div>
+    </div>
+</body>
 
-        <!-- Phone Address -->
-        <div class="mt-4">
-            <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-        </div>
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

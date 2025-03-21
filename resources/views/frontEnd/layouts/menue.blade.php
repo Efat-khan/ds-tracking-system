@@ -17,14 +17,14 @@
             <a href="{{route('employee.ds.work.index')}}"
                 id="add-task-cta"
                 class="button regular-button blue-background"
-                style="padding-top:9px;">
+                style="padding-top:9px; text-decoration:none; color:black;">
                 Add Todays Task
             </a>
             @endif
             <a href="{{route('employee.ds.index')}}"
                 id="add-task-cta"
                 class="button regular-button blue-background"
-                style="padding-top:9px;">
+                style="padding-top:9px;text-decoration:none; color:black;">
                 Add DS
             </a>
             <!-- Authentication -->
@@ -63,7 +63,7 @@
             </a>
         </div>
         <div class="radio-container">
-            <a href="{{route('employee.report')}}" class="radio-label {{ request()->routeIs('employee.community') ? 'active' : '' }}">
+            <a href="{{route('employee.report.index')}}" class="radio-label {{ request()->routeIs('employee.report.index') ? 'active' : '' }}">
                 <iconify-icon
                     icon="ic:round-grid-view"
                     style="color: black"
