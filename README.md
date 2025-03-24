@@ -23,7 +23,6 @@ The **Daily Standup Management System** is a web-based application designed to f
   - Employees who have submitted their DS
   - Employees present in the office physically
   - Overall task completion statistics
-- **User Management:** Manage employees, assign roles, and configure permissions.
 - **Insights and Analytics:** View key performance metrics on the admin dashboard.
 
 ## Technology Stack
@@ -31,7 +30,7 @@ The **Daily Standup Management System** is a web-based application designed to f
 - **Frontend:** Bootstrap, Custom Theme
 - **Database:** MySQL (or any supported relational database)
 - **Authentication:** Laravel Authentication System
-- **Deployment:** Apache/Nginx, Laravel Queue (for background jobs)
+- **Plugin:**  Select2
 
 ## Installation Guide
 ### Prerequisites
@@ -44,7 +43,7 @@ The **Daily Standup Management System** is a web-based application designed to f
 ### Steps to Install
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/daily-standup-management.git
+   git clone [https://github.com/your-repo/daily-standup-management.git](https://github.com/Efat-khan/ds-tracking-system.git)
    ```
 2. Navigate to the project directory:
    ```sh
