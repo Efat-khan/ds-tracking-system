@@ -7,19 +7,19 @@
 	<div class="page-content">
 		<!--breadcrumb-->
 		<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-			<div class="breadcrumb-title pe-3">Member</div>
+			<div class="breadcrumb-title pe-3">Employee</div>
 			<div class="ps-3">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb mb-0 p-0">
 						<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 						</li>
-						<li class="breadcrumb-item active" aria-current="page">All Member</li>
+						<li class="breadcrumb-item active" aria-current="page">All Employee</li>
 					</ol>
 				</nav>
 			</div>
 			<div class="ms-auto">
 				<div class="btn-group">
-					<a href="{{route('admin.member.create')}}" class="btn btn-primary">Add Member</a>
+					<a href="{{route('admin.Employee.create')}}" class="btn btn-primary">Add Employee</a>
 					
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 			<div class="card-body ">
 				<div class="table-responsive">
 					<table id="example2" class="table table-striped table-bordered">
-						@if (!empty($members))
+						@if (!empty($Employees))
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -46,9 +46,9 @@
 						</thead>
 						<tbody>
 
-							@foreach ($members as $data)
+							@foreach ($Employees as $data)
 
-							<tr id="member_{{$data->user_id}}">
+							<tr id="Employee_{{$data->user_id}}">
 								<td>{{$data->name}}</td>
 								<td>{{$data->phone}}</td>
 								<td>{{$data->institute_department}}</td>
@@ -61,10 +61,10 @@
 									<div class="btn-group" role="group" aria-label="Basic example">
 										<!-- <a type="button" class="btn btn-success" title="View Data"><i class='bx bx-search-alt me-0'></i>
 											</a> -->
-										<a type="button" href="{{route('admin.member.edit',$data->id)}}" class="btn btn-info" title="Edit Data"><i class='bx bx-pencil me-0'></i>
+										<a type="button" href="{{route('admin.Employee.edit',$data->id)}}" class="btn btn-info" title="Edit Data"><i class='bx bx-pencil me-0'></i>
 										</a>
 										@if (Auth::user()->id != $data->user_id)
-										<button value="{{ $data->user_id }}" class="btn btn-danger delete_member" data-confirm-delete="true" title="Delete Member"><i class="bx bx-trash me-0"></i></button>
+										<button value="{{ $data->user_id }}" class="btn btn-danger delete_Employee" data-confirm-delete="true" title="Delete Employee"><i class="bx bx-trash me-0"></i></button>
 										@endif
 
 									</div>
@@ -94,17 +94,9 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
 @endsection
 
 @section('custom-js-section')
-
-
 <script>
 	$('.delete_member').click(function(e) {
 		e.preventDefault();

@@ -44,7 +44,7 @@ class ReportController extends Controller
             ->orderBy('date', 'desc')
             ->get();
 
-        return view('admin.backEnd.report.daily_report', compact('current_day_reports', 'previous_day_reports', 'current_date', 'previous_date'));
+        return view('admin.backEnd.report.daily_report', compact('current_day_reports', 'previous_day_reports', 'current_date', 'previous_date','userIds'));
     }
     public function dateRangeReportIndex()
     {

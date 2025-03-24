@@ -13,14 +13,12 @@
 	<!--navigation-->
 	<ul class="metismenu" id="menu">
 		<li>
-			<a href="">
+			<a href="{{route('admin.dashboard')}}">
 				<div class="parent-icon"><i class='bx bx-home-alt'></i>
 				</div>
 				<div class="menu-title">Dashboard</div>
 			</a>
 		</li>
-		
-
 		<li class="menu-label">Report</li>
 		<li>
 			<a href="{{route('admin.dailyReport')}}">
@@ -36,7 +34,7 @@
 				<div class="menu-title">Date Range Report</div>
 			</a>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="javascript:;" class="has-arrow">
 				<div class="parent-icon"><i class='bx bx-group'></i>
 				</div>
@@ -48,16 +46,9 @@
 				<li> <a href=""><i class='bx bx-radio-circle'></i>Create Member</a>
 				</li>
 			</ul>
-		</li>
+		</li> -->
 		
 		<li class="menu-label">Setting</li>
-		<li>
-			<a href="">
-				<div class="parent-icon"><i class='bx bx-cog'></i>
-				</div>
-				<div class="menu-title">Home Layout</div>
-			</a>
-		</li>
 		<li>
 			<form method="POST" action="{{ route('admin.logout') }}">
 				@csrf

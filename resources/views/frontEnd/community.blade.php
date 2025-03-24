@@ -83,7 +83,7 @@
                     <input type="text" name="daily_summary_id" value="{{ $todays_ds->id }}" hidden>
                     <input type="text" name="name" value="{{ $value->name }}" hidden>
 
-                    <input type="number" name="estimated_time" value="{{ $value->estimated_time }}" hidden>
+                    <input type="number" name="estimated_time" value="{{ $value->estimated_time/60 }}" hidden>
                     <input type="text" name="task_status" value="to_do" hidden>
 
                     <div class="text-end">

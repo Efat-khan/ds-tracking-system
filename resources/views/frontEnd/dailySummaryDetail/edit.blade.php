@@ -241,14 +241,14 @@
         value="">{{ $daily_summary_detail->name ?? '' }}</textarea>
       @error('name') <p class="text-dark">{{ $message }}</p> @enderror
 
-      <label for="estimated_time" class="label">Estimated Time</label>
+      <label for="estimated_time" class="label">Estimated Time(Hours)</label>
       <input type="number" name="estimated_time" value="{{ $daily_summary_detail->estimated_time/60 ?? '' }}" class="input white-background">
       @error('estimated_time') <p class="text-dark">{{ $message }}</p> @enderror
 
-      <label for="spent_time" class="label">Spent Time</label>
+      <label for="spent_time" class="label">Spent Time(Hours)</label>
       <input type="number" name="spent_time" value="{{ $daily_summary_detail->spent_time/60 ?? '' }}" class="input white-background">
 
-      <label for="learning_time" class="label">Learning Time</label>
+      <label for="learning_time" class="label">Learning Time(Hours)</label>
       <input type="number" name="learning_time" value="{{ $daily_summary_detail->learning_time/60 ?? '' }}" class="input white-background">
 
       <h2 class="label">Status</h2>

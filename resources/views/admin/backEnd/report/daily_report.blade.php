@@ -43,7 +43,9 @@
             <select name="user_ids[]" id="user_ids" class="form-control select2" multiple>
               <option value="">Select Employee</option>
               @foreach (App\Models\User::all() as $user)
-              <option value="{{$user->id}}">{{$user->name}}</option>
+              <option value="{{$user->id}}" {{ in_array($user->id, $userIds ?? []) ? 'selected' : '' }}>
+                {{$user->name}}
+              </option>
               @endforeach
             </select>
           </div>
