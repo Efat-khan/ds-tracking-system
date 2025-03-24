@@ -32,7 +32,6 @@ Route::prefix('employee')->middleware(['auth', 'verified'])->group(function(){
     Route::post('/employee/report/export/csv', [ReportController::class, 'exportCSV'])->name('employee.report.export.csv');
     Route::post('/employee/report/export/excel', [ReportController::class, 'exportExcel'])->name('employee.report.export.excel');
 
-    
     Route::get('/index', [DailySummaryController::class, 'index'])->name('employee.ds.index');
     Route::post('/add-daily-summary',[DailySummaryController::class,'store'])->name('employee.ds.store');
     Route::get('/work/index', [DailySummaryDetailsController::class, 'index'])->name('employee.ds.work.index');
@@ -40,7 +39,6 @@ Route::prefix('employee')->middleware(['auth', 'verified'])->group(function(){
     Route::get('/work/edit/{id}', [DailySummaryDetailsController::class, 'edit'])->name('employee.ds.work.edit');
     Route::post('/work/update/', [DailySummaryDetailsController::class, 'update'])->name('employee.ds.work.update');
     Route::get('/work/delete/{id}',[DailySummaryDetailsController::class,'delete'])->name('employee.ds.work.delete');
-
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

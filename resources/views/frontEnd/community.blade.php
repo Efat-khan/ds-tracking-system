@@ -14,6 +14,7 @@
     color: #333;
     /* Darker color for emphasis */
   }
+
   .status-dropdown {
     border: none;
     padding: 8px;
@@ -51,39 +52,33 @@
 
     @if (count($all_users_todays_details) != 0)
     <!-- board view -->
-    <div id="board-view" class="board-view">
-      <!-- list -->
-      <div>
-        <h2 class="list-header">
-          <span class="circle green-background"></span><span class="text">Community Ds</span>
-        </h2>
-        <ul class="tasks-list green">
-          @foreach ($all_users_todays_details as $key=>$value)
-          <li class="task-item">
-            <div class="task-button">
-              <div>
-                <div style="display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px; padding-bottom:10px">
+    <!-- list -->
+    <div id="board-view" class="row board-view">
+    @foreach ($all_users_todays_details as $key=>$value)
+      <div class="col-md-12 tasks-list green ">
+        <div class="task-item">
+          <div class="">
+            <div>
+              <div class="row m-3">
+                <div class="col-md-6 text-start" >
                   <p class="task-name">{{ $value['users']->name }}</p>
-                  <div class="text-center" style="padding-top: 0;">
-                    <a href="{{$value->git_url??'#'}}"
-                      target="_blank"
-                      class="button regular-button green-background cta-button" title="Add this to my task.">
-                      Git URL
-                    </a>
-                  </div>
                 </div>
-                @if (count($value['details'])>0)
-                @foreach ($value['details'] as $key=>$value)
-                <div style="display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px; padding-bottom:10px">
-                  <p class="task-due-date" style="flex-grow: 1;">{{ $key+1 }}. {{$value->name}} - {{($value->task_status === 'to_do')?'TO DO':($value->task_status === 'in_progress'?'In Progress':'Complete')}} - ET {{$value->estimated_time}}h</p>
-                  <form method="POST" action="{{ route('employee.ds.work.store') }}" style="display: flex;
-  align-items: center;">
+                <div class="col-md-6 text-end">
+                  <a href="{{$value->git_url??'#'}}"
+                    target="_blank"
+                    class="button regular-button green-background cta-button" style="text-decoration:none; color:black;" title="Add this to my task.">
+                    Git URL
+                  </a>
+                </div>
+              </div>
+              @if (count($value['details'])>0)
+              @foreach ($value['details'] as $key=>$value)
+              <div class="row m-3">
+                <div class="col-md-6 text-start">
+                  <p class="task-due-date"><strong>{{ $key+1 }}.</strong> {{$value->name}} - {{($value->task_status === 'to_do')?'TO DO':($value->task_status === 'in_progress'?'In Progress':'Complete')}}<br><strong>ET-{{$value->estimated_time/60}}h</strong> </p>
+                </div>
+                <div class="col-md-6 text-end">
+                  <form method="POST" action="{{ route('employee.ds.work.store') }}">
                     @csrf
                     <input type="text" name="daily_summary_id" value="{{ $todays_ds->id }}" hidden>
                     <input type="text" name="name" value="{{ $value->name }}" hidden>
@@ -91,7 +86,7 @@
                     <input type="number" name="estimated_time" value="{{ $value->estimated_time }}" hidden>
                     <input type="text" name="task_status" value="to_do" hidden>
 
-                    <div class="text-center">
+                    <div class="text-end">
                       <button
                         type="submit"
                         class="button regular-button green-background cta-button" title="Add this to my task.">
@@ -100,18 +95,20 @@
                     </div>
                   </form>
                 </div>
-                @endforeach
-                @else
-                <p class="task-due-date"> No Task Added Today.</p>
-                @endif
-                <!-- Dropdown moved below the task name -->
-
               </div>
+              @endforeach
+              @else
+              <div class="m-3">
+                <p class="task-due-date"> No Task Added Today.</p>
+              </div>
+              @endif
+              <!-- Dropdown moved below the task name -->
+
             </div>
-          </li>
-          @endforeach
-        </ul>
+          </div>
+        </div>
       </div>
+      @endforeach
     </div>
     @else
 

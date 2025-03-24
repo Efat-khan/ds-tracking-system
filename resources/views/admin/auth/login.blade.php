@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DS Management System - Admin Login</title>
-
     <!-- Google Font: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +26,6 @@
 
             <form class="form" autocomplete="off" method="POST" action="{{ route('admin.login') }}">
                 @csrf
-
                 <!-- Email -->
                 <label for="email" class="label">Email</label>
                 <input type="email" name="email" id="email" class="input" value="{{ old('email') }}" required />
@@ -36,7 +34,6 @@
                     {{ $errors->first('email') }}
                 </div>
                 @endif
-
                 <!-- Password -->
                 <label for="password" class="label">Password</label>
                 <input type="password" name="password" id="password" class="input" required autocomplete="current-password" />
@@ -45,7 +42,6 @@
                     {{ $errors->first('password') }}
                 </div>
                 @endif
-
                 <!-- Submit Button -->
                 <button type="submit" class="button regular-button pink-background cta-btn">
                     Log in

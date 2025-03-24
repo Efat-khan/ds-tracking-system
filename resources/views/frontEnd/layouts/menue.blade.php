@@ -52,6 +52,7 @@
                 <span>Todays Task</span>
             </a>
         </div>
+        @if (!empty($todays_ds))
         <div class="radio-container">
             <a href="{{route('employee.community')}}" class="radio-label {{ request()->routeIs('employee.community') ? 'active' : '' }}">
                 <iconify-icon
@@ -62,6 +63,7 @@
                 <span>Community</span>
             </a>
         </div>
+        @endif
         <div class="radio-container">
             <a href="{{route('employee.report.index')}}" class="radio-label {{ request()->routeIs('employee.report.index') ? 'active' : '' }}">
                 <iconify-icon

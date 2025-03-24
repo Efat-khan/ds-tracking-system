@@ -17,7 +17,7 @@ class DailySummaryController extends Controller
         if($todays_ds){
             $data = $todays_ds;
         }else{
-        $yesterday_ds = DailySummary::where('date',Carbon::yesterday()->format('Y-m-d'))->where('user_id',Auth::user()->id)->first();
+        $yesterday_ds = DailySummary::where('date','<',Carbon::now()->format('Y-m-d'))->where('user_id',Auth::user()->id)->orderBy('date','desc')->first();
         $data = $yesterday_ds;
         }
         // dd($yesterday_ds->git_url);
