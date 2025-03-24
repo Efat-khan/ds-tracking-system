@@ -30,7 +30,7 @@ The **Daily Standup Management System** is a web-based application designed to f
 - **Frontend:** Bootstrap, Custom Theme
 - **Database:** MySQL (or any supported relational database)
 - **Authentication:** Laravel Authentication System
-- **Deployment:** Apache/Nginx, Laravel Queue (for background jobs)
+- **Plugin:**  Select2
 
 ## Installation Guide
 ### Prerequisites
