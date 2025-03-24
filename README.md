@@ -23,7 +23,6 @@ The **Daily Standup Management System** is a web-based application designed to f
   - Employees who have submitted their DS
   - Employees present in the office physically
   - Overall task completion statistics
-- **User Management:** Manage employees, assign roles, and configure permissions.
 - **Insights and Analytics:** View key performance metrics on the admin dashboard.
 
 ## Technology Stack
