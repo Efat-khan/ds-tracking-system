@@ -44,7 +44,7 @@ The **Daily Standup Management System** is a web-based application designed to f
 ### Steps to Install
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/daily-standup-management.git
+   git clone [https://github.com/your-repo/daily-standup-management.git](https://github.com/Efat-khan/ds-tracking-system.git)
    ```
 2. Navigate to the project directory:
    ```sh
