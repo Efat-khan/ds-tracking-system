@@ -48,7 +48,7 @@
                 </button>
 
                 <!-- Remember Me -->
-                <div class="remember-me-container">
+                <div class="remember-me-container"  style="margin-top: 10px;">
                     <input id="remember_me" type="checkbox" name="remember">
                     <label for="remember_me">Remember me</label>
                 </div>
